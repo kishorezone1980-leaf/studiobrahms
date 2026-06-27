@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Brahms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Datatype';
+      src: url('fonts/Datatype.woff2') format('woff2');
+      font-weight: 100 900;
+      font-stretch: 50% 150%;
+      font-display: swap;
+    }
+
+    :root {
+      /* Core */
+      --color-bg-dark:        #0A0A0A;
+      --color-bg-light:       #EEEAE0;
+      --color-bg-mid:         #1A1A1A;
+
+      /* Text */
+      --color-text-primary:   #F3F3E2;
+      --color-text-dark:      #0A0A0A;
+      --color-text-muted:     #888888;
+      --color-text-mid:       #555555;
+
+      /* Tracking */
+      --tracking-body:        -0.01em;
+      --tracking-display:     0.01em;
+      --tracking-ui:          0.06em;
+
+      /* Leading */
+      --leading-display:      0.85;
+      --leading-body:         1.35;
+
+      /* Accent */
+      --color-gold:           #B8933A;
+      --color-gold-light:     #D4A84B;
+      --color-tagline:        #9B5044;
+      --color-bg-contact:     #3A3533;
+      --color-bg-contact-form:#4A4341;
+
+      /* Borders */
+      --color-border-dark:    #2A2A2A;
+      --color-border-light:   #DDDDDD;
+
+      /* Typography */
+      --font-display:         'Bebas Neue', sans-serif;
+      --font-body:            'Inter', sans-serif;
+      --font-typewriter:      'Datatype', 'Courier New', monospace;
+
+      --text-hero:            clamp(64px, 12vw, 140px);
+      --text-display:         clamp(48px, 8vw, 96px);
+      --text-heading:         clamp(32px, 5vw, 56px);
+      --text-subhead:         clamp(18px, 2.5vw, 24px);
+      --text-body:            16px;
+      --text-small:           13px;
+
+      /* Spacing */
+      --space-xs:             8px;
+      --space-sm:             16px;
+      --space-md:             32px;
+      --space-lg:             64px;
+      --space-xl:             96px;
+      --space-2xl:            128px;
+      --space-3xl:            192px;
+
+      --section-padding-y:    var(--space-3xl);
+      --section-padding-x:    36px;
+      --content-max-width:    1200px;
+    }
+  </style>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__bar">
+      <div class="nav__links">
+        <a href="#who-we-are">WHO WE ARE</a>
+        <a href="#what-we-do">WHAT WE CREATE</a>
+        <a href="#contact">CONTACT</a>
+      </div>
+      <button class="nav__hamburger" type="button" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <a href="#hero" class="nav__b-mark" aria-label="Scroll to top">
+      <svg class="nav__b-logo" width="283" height="381" viewBox="0 0 283 381" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0 380.097V0H142.938C173.988 0 200.577 11.0639 222.705 33.1916C244.833 54.9624 255.896 81.5514 255.896 112.958C255.896 138.298 246.796 160.069 228.594 178.271C245.011 186.837 258.038 198.971 267.674 214.675C277.667 230.378 282.664 248.223 282.664 268.209C282.664 299.617 271.6 326.205 249.472 347.976C227.345 369.39 199.863 380.097 167.029 380.097H0Z" fill="currentColor"/>
+      </svg>
+    </a>
+  </nav>
+
+  <div class="nav__mobile-menu" aria-hidden="true">
+    <a href="#who-we-are">WHO WE ARE</a>
+    <a href="#what-we-do">WHAT WE CREATE</a>
+    <a href="#contact">CONTACT</a>
+  </div>
+
+  <div class="card-stack">
+
+    <div class="sticky-stage">
+      <!-- CARD 01 — Hero: sticky, z-index 1 -->
+      <section class="card card--sticky" id="hero" data-nav-theme="dark">
+        <div class="card__content hero">
+          <picture class="hero__brand-wrap">
+            <source media="(max-width: 768px)" srcset="images/B_Studio.svg">
+            <img
+              src="images/StudioBrahms_hero_Image.png"
+              alt="Studio Brahms"
+              class="hero__brand"
+              width="1231"
+              height="381"
+            >
+          </picture>
+        </div>
+      </section>
+
+      <!-- CARD 02 — Who We Are: sticky stack entry, z-index 2 -->
+      <section class="card card--sticky card--stack-entry" id="who-we-are" data-nav-theme="dark">
+        <div class="card__content who-we-are">
+          <h2 class="who-we-are__heading reveal">
+            <span class="who-we-are__heading-line">WHO WE</span>
+            <span class="who-we-are__heading-line">ARE?</span>
+          </h2>
+          <div class="who-we-are__grid">
+            <p class="who-we-are__text reveal">We are a product design consultancy. We work with founders and product teams to get the thinking right before a single screen is drawn — and see it through to a working prototype.</p>
+            <p class="who-we-are__text reveal">25 years across enterprise SaaS, insurance, HR tech, real estate, and aerospace — from zero-to-one startups to complex enterprise systems.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CARD 02B — Philosophy: static, revealed after sticky stage, beneath What We Do -->
+    <section class="card card--static" id="philosophy" data-nav-theme="dark">
+      <div class="philosophy__pin">
+        <figure class="philosophy__media">
+          <img
+            src="images/saul-bass.png"
+            alt=""
+            class="philosophy__image"
+            width="1442"
+            height="870"
+          >
+        </figure>
+        <div class="philosophy__overlay" aria-hidden="true"></div>
+        <div class="card__content philosophy">
+          <div class="philosophy__copy reveal is-visible">
+            <h2 class="philosophy__headline">
+              <span class="philosophy__headline-line">DESIGN IS</span>
+              <span class="philosophy__headline-line">DECISIONS</span>
+              <span class="philosophy__headline-line">OF TASTE</span>
+            </h2>
+            <p class="philosophy__subhead">
+              <span class="philosophy__subhead-line">FROM STRATEGY TO</span>
+              <span class="philosophy__subhead-line">EXECUTION.</span>
+            </p>
+            <p class="philosophy__tagline">
+              <span class="philosophy__rule" aria-hidden="true"></span>
+              <span class="philosophy__tagline-text">
+                <span class="philosophy__tagline-line">By people who think</span>
+                <span class="philosophy__tagline-line">before they draw.</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Do — normal sequential scroll -->
+    <section class="card card--normal" id="what-we-do" data-nav-theme="dark">
+      <div class="card__content what-we-do">
+        <h2 class="what-we-do__heading reveal">
+          <span class="what-we-do__heading-line">WHAT WE</span>
+          <span class="what-we-do__heading-line">DO?</span>
+        </h2>
+        <ul class="what-we-do__list reveal">
+          <li class="what-we-do__item"><a href="#product-design">PRODUCT DESIGN</a></li>
+          <li class="what-we-do__item"><a href="#daas">DESIGN AS A SERVICE</a></li>
+          <li class="what-we-do__item"><a href="#workshops">WORKSHOPS</a></li>
+          <li class="what-we-do__item"><a href="#branding">BRANDING</a></li>
+          <li class="what-we-do__item">DESIGN SYSTEM</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Service cards section — pins in viewport while cards stack, then releases -->
+    <section
+      id="service-cards"
+      class="service-cards-section"
+      aria-label="Service cards section"
+      data-nav-theme="light"
+    >
+      <div class="service-cards-section__stage">
+        <div class="service-cards-section__pin">
+          <div class="service-cards-section__bg" aria-hidden="true">
+            <img
+              src="images/Pattern_bg.png"
+              alt=""
+              class="service-cards-section__bg-image"
+              width="1920"
+              height="1080"
+            >
+          </div>
+          <div class="service-cards-section__deck">
+
+              <article class="service-card" id="product-design">
+                <div class="service__heading-block">
+                  <h2 class="service__heading">
+                    <span class="heading-layered">
+                      <span class="heading-layer heading-layer--2" aria-hidden="true">PRODUCT</span>
+                      <span class="heading-layer heading-layer--1" aria-hidden="true">PRODUCT</span>
+                      <span class="heading-layer heading-layer--0">PRODUCT</span>
+                    </span><br>
+                    DESIGN
+                  </h2>
+                </div>
+                <p class="service-card__tagline">
+                  <span class="service-card__number">01</span><span class="service-card__rule" aria-hidden="true"></span>Discovery to Launch. Full ownership
+                </p>
+                <p class="service-card__body">From the first stakeholder conversation to a working clickthrough prototype — research, strategy, and execution handled as one engagement. No handoffs. No gaps.</p>
+                <a href="#contact" class="service-card__cta">Connect with us<span class="cta-chevron" aria-hidden="true"><svg class="cta-chevron__icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L8 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+              </article>
+
+              <article class="service-card" id="daas">
+                <div class="service__heading-block">
+                  <h2 class="service__heading">
+                    <span class="heading-layered">
+                      <span class="heading-layer heading-layer--2" aria-hidden="true">DESIGN</span>
+                      <span class="heading-layer heading-layer--1" aria-hidden="true">DESIGN</span>
+                      <span class="heading-layer heading-layer--0">DESIGN</span>
+                    </span><br>
+                    AS A SERVICE
+                  </h2>
+                </div>
+                <p class="service-card__tagline">
+                  <span class="service-card__number">02</span><span class="service-card__rule" aria-hidden="true"></span>On demand, Need based support, Lean and flexible
+                </p>
+                <p class="service-card__body">Feature design, iterations, review cycles. Works alongside your existing team or dev partner. Weekly or monthly engagement.</p>
+                <a href="#contact" class="service-card__cta">Connect with us<span class="cta-chevron" aria-hidden="true"><svg class="cta-chevron__icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L8 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+              </article>
+
+              <article class="service-card" id="workshops">
+                <div class="service__heading-block">
+                  <h2 class="service__heading">
+                    <span class="heading-layered">
+                      <span class="heading-layer heading-layer--2" aria-hidden="true">DESIGN</span>
+                      <span class="heading-layer heading-layer--1" aria-hidden="true">DESIGN</span>
+                      <span class="heading-layer heading-layer--0">DESIGN</span>
+                    </span><br>
+                    SPRINT /<br>
+                    WORKSHOPS
+                  </h2>
+                </div>
+                <p class="service-card__tagline">
+                  <span class="service-card__number">03</span><span class="service-card__rule" aria-hidden="true"></span>Unblock your team. Validate a direction. Fast.
+                </p>
+                <p class="service-card__body">A structured session to align your team, validate a direction, or break a product deadlock. Remote or in-person, Bengaluru.</p>
+                <a href="#contact" class="service-card__cta">Connect with us<span class="cta-chevron" aria-hidden="true"><svg class="cta-chevron__icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L8 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+              </article>
+
+              <article class="service-card" id="branding">
+                <div class="service__heading-block">
+                  <h2 class="service__heading">
+                    <span class="heading-layered">
+                      <span class="heading-layer heading-layer--2" aria-hidden="true">BRANDING</span>
+                      <span class="heading-layer heading-layer--1" aria-hidden="true">BRANDING</span>
+                      <span class="heading-layer heading-layer--0">BRANDING</span>
+                    </span><br>
+                    DESIGN SYSTEM<br>
+                    PRESENTATIONS
+                  </h2>
+                </div>
+                <p class="service-card__tagline">
+                  <span class="service-card__number">04</span><span class="service-card__rule" aria-hidden="true"></span>As part of a bigger engagement or as a separate offering.
+                </p>
+                <p class="service-card__body">Available standalone or as part of a larger engagement. Strategy and art direction provided. Pricing on request.</p>
+                <a href="#contact" class="service-card__cta">Connect with us<span class="cta-chevron" aria-hidden="true"><svg class="cta-chevron__icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L8 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+              </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="card card--normal card--stack-entry" id="contact" data-nav-theme="dark">
+      <div class="card__content contact">
+        <div class="contact__grid">
+          <div class="contact__info reveal">
+            <h2 class="contact__heading">CONTACT</h2>
+            <ul class="contact__details">
+              <li class="contact__detail">
+                <svg class="contact__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M10 1.5C6.686 1.5 4 4.186 4 7.5C4 12.125 10 18.5 10 18.5C10 18.5 16 12.125 16 7.5C16 4.186 13.314 1.5 10 1.5Z" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="10" cy="7.5" r="2.25" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <span>Bengaluru</span>
+              </li>
+              <li class="contact__detail">
+                <svg class="contact__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <rect x="2.5" y="4.5" width="15" height="11" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M3 5.5L10 10.5L17 5.5" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <a href="mailto:admin@studiobrahms.com">admin@studiobrahms.com</a>
+              </li>
+              <li class="contact__detail">
+                <svg class="contact__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5.5 3.5H7L8.5 7.5L6.75 8.75C7.85 11.45 9.55 13.15 12.25 14.25L13.5 12.5L17.5 14V15.5C17.5 16.05 17.05 16.5 16.5 16.5C8.5 16.5 3.5 11.5 3.5 3.5C3.5 2.95 3.95 2.5 4.5 2.5H5.5V3.5Z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <a href="tel:+919611900770">+91 96119 00770</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact__form-panel reveal">
+            <p class="contact__form-title">Connect with us</p>
+            <form class="contact__form" name="contact" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="contact">
+              <div class="form__field">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="name" autocomplete="name" required>
+              </div>
+              <div class="form__field">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" autocomplete="email" required>
+              </div>
+              <div class="form__field form__field--message">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="form__submit">Connect<span class="cta-chevron" aria-hidden="true"><svg class="cta-chevron__icon" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L8 8L1 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="card card--normal" id="footer" data-nav-theme="dark" aria-label="Footer">
+      <div class="footer__inner">
+        <img
+          src="images/Footer-graphic.svg"
+          alt=""
+          class="footer__graphic"
+          width="1440"
+          height="932"
+        >
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

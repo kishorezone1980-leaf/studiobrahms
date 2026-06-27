@@ -1,0 +1,1172 @@
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-text-primary);
+  background: var(--color-bg-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+
+:root {
+  --b-logo-fill: #F3F3E2;
+  --nav-link-color: #F3F3E2;
+}
+
+.nav--on-light {
+  --b-logo-fill: #000000;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.nav__bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: clamp(16px, 2vw, 24px) var(--section-padding-x);
+  background: #000000;
+  pointer-events: auto;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+.nav--scrolled .nav__bar {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+.nav__links {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.nav__links a {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 32px);
+  line-height: calc(39 / 32);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #F3F3E2;
+  transition: opacity 0.3s ease;
+}
+
+.nav__links a:nth-child(1) {
+  justify-self: start;
+}
+
+.nav__links a:nth-child(2) {
+  justify-self: center;
+}
+
+.nav__links a:nth-child(3) {
+  justify-self: end;
+}
+
+.nav__links a:hover,
+.nav__links a:focus-visible {
+  opacity: 0.7;
+}
+
+.nav__b-mark {
+  position: fixed;
+  top: var(--space-sm);
+  left: var(--section-padding-x);
+  z-index: 101;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease, color 0.45s ease;
+  color: var(--b-logo-fill);
+}
+
+.nav--scrolled .nav__b-mark {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nav__b-logo {
+  display: block;
+  width: 32px;
+  height: auto;
+  color: inherit;
+  transition: color 0.45s ease;
+}
+
+.nav__hamburger {
+  display: none;
+}
+
+.nav__mobile-menu {
+  display: none;
+}
+
+/* ==========================================================================
+   Card stack — scroll architecture
+   ========================================================================== */
+
+.card-stack {
+  position: relative;
+  width: 100%;
+}
+
+/* Bounded scroll runway for hero + who-we-are stickies */
+.sticky-stage {
+  position: relative;
+  height: 200vh;
+}
+
+.sticky-stage .card {
+  min-height: 100vh;
+}
+
+.card {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.card--sticky {
+  overflow: visible;
+}
+
+.card:not(.card--sticky) {
+  overflow: hidden;
+}
+
+/* Stacking cards */
+.card--sticky {
+  position: sticky;
+  top: 0;
+}
+
+/* Static background card (Saul Bass) — fixed in place while What We Do scrolls over */
+.card--static {
+  position: relative;
+}
+
+/* Normal scroll cards */
+.card--normal {
+  position: relative;
+}
+
+/* Z-index stack */
+#footer       { z-index: 1; }
+#hero         { z-index: 1; }
+#who-we-are   { z-index: 2; }
+#philosophy   { z-index: 1; }
+#what-we-do   { z-index: 3; }
+#service-cards { z-index: auto; }
+#contact      { z-index: 6; }
+
+/* Slide-up entry for sticky stack cards (not hero) — animate inner content only */
+.card--stack-entry .card__content {
+  transform: translateY(60px);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card--stack-entry.card--visible .card__content {
+  transform: translateY(0);
+}
+
+/* Section backgrounds — scaffold only, no content */
+#hero,
+#who-we-are,
+#footer {
+  background: var(--color-bg-dark);
+}
+
+#philosophy {
+  margin-top: -100vh;
+  min-height: 200vh;
+  overflow: visible;
+  background: var(--color-bg-dark);
+}
+
+#what-we-do {
+  background: var(--color-bg-mid);
+}
+
+#contact {
+  background: var(--color-bg-contact);
+}
+
+#service-cards {
+  background: transparent;
+}
+
+.card__content {
+  min-height: 100vh;
+  padding: var(--section-padding-y) var(--section-padding-x);
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+#hero .card__content.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  padding-top: calc(var(--space-lg) + 48px);
+  padding-bottom: var(--section-padding-x);
+}
+
+.hero__brand-wrap {
+  display: block;
+  line-height: 0;
+}
+
+.hero__brand {
+  display: block;
+  width: 70vw;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   Section titles
+   ========================================================================== */
+
+.who-we-are__heading,
+.what-we-do__heading,
+.contact__heading {
+  margin: 0;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(56px, 10vw, 144px);
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #F3F3E2;
+}
+
+.contact__heading {
+  margin-bottom: var(--space-xl);
+}
+
+.who-we-are__heading-line,
+.what-we-do__heading-line {
+  display: block;
+}
+
+/* ==========================================================================
+   Who We Are
+   ========================================================================== */
+
+#who-we-are .card__content.who-we-are {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  padding-top: calc(var(--space-2xl) + 48px);
+}
+
+.who-we-are__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(30vw, 1fr));
+  gap: 100px;
+  margin-top: auto;
+}
+
+.who-we-are__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 2.5vw;
+  font-weight: 300;
+  line-height: var(--leading-body);
+  text-align: justify;
+  color: var(--color-text-primary);
+  min-width: 30vw;
+}
+
+/* ==========================================================================
+   Philosophy
+   ========================================================================== */
+
+.philosophy__pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+#philosophy .card__content.philosophy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: calc(var(--space-xl) + 48px);
+  padding-bottom: var(--section-padding-x);
+}
+
+.philosophy__media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  z-index: 0;
+}
+
+.philosophy__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(10, 10, 10, 0.5);
+  pointer-events: none;
+}
+
+.philosophy__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 35% center;
+}
+
+.philosophy__copy {
+  width: min(48%, 42vw);
+  margin-left: auto;
+}
+
+.philosophy__headline {
+  margin: 0 0 var(--space-md);
+  font-family: var(--font-display);
+  font-size: 10vh;
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.philosophy__headline-line {
+  display: block;
+}
+
+.philosophy__subhead {
+  margin: 0 0 var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 2.8vh;
+  font-weight: 400;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.philosophy__subhead-line {
+  display: block;
+}
+
+.philosophy__tagline {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 2.2vh;
+  font-weight: 300;
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-text-primary);
+}
+
+.philosophy__rule {
+  flex-shrink: 0;
+  width: 2.5em;
+  height: 1px;
+  margin-top: 0.65em;
+  background: var(--color-text-primary);
+}
+
+.philosophy__tagline-line {
+  display: block;
+}
+
+/* ==========================================================================
+   What We Do
+   ========================================================================== */
+
+#what-we-do .card__content.what-we-do {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding-top: calc(var(--space-xl) + 48px);
+  padding-bottom: var(--section-padding-x);
+  background: var(--color-bg-mid);
+}
+
+.what-we-do__list {
+  list-style: none;
+  margin: 0;
+  margin-left: auto;
+  padding: 0;
+  text-align: right;
+}
+
+.what-we-do__item {
+  font-family: var(--font-body);
+  font-size: 9vh;
+  font-weight: 300;
+  line-height: var(--leading-display);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.what-we-do__item a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.what-we-do__item a:hover {
+  color: var(--color-gold);
+}
+
+/* ==========================================================================
+   Service cards section — fixed pin while cards stack on scroll
+   ========================================================================== */
+
+.service-cards-section {
+  position: relative;
+  width: 100%;
+  background: var(--color-bg-dark);
+}
+
+.service-cards-section__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.service-cards-section__pin {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.service-cards-section__pin.is-fixed {
+  position: fixed;
+}
+
+.service-cards-section__pin.is-ended {
+  position: absolute;
+  bottom: 0;
+  top: auto;
+}
+
+.service-cards-section__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.service-cards-section__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.service-cards-section__deck {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.service-card {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: 70vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: clamp(36px, 4vw, 56px);
+  background: var(--color-bg-light);
+  color: var(--color-text-dark);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.service__heading-block {
+  max-width: 28em;
+}
+
+.service__heading-block {
+  position: relative;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(48px, 6.9vw, 98.9621px);
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+/* Layered first word — full-text boxes stacked behind with opaque bg */
+.heading-layered {
+  position: relative;
+  display: inline-block;
+  padding-top: calc(0.28em - 1px);
+}
+
+.heading-layer {
+  display: block;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  white-space: nowrap;
+  background-color: var(--color-bg-light);
+}
+
+.heading-layer--0 {
+  position: relative;
+  z-index: 3;
+}
+
+.heading-layer--1,
+.heading-layer--2 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.heading-layer--1 {
+  z-index: 2;
+  transform: translateY(calc(-0.14em - 1px));
+}
+
+.heading-layer--2 {
+  z-index: 1;
+  transform: translateY(calc(-0.28em + 2px));
+}
+
+.service__heading {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+.service-card__tagline {
+  margin: 0;
+  max-width: 643px;
+  font-family: var(--font-typewriter);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(22px, 2.5vw, 36px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #774032;
+}
+
+.service-card__number {
+  font-variant-numeric: tabular-nums;
+}
+
+.service-card__rule {
+  display: inline-block;
+  width: 2.5em;
+  height: 1px;
+  margin: 0 0.5em;
+  vertical-align: middle;
+  background: currentColor;
+}
+
+.service-card__body {
+  margin: 0;
+  max-width: 566px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(18px, 1.67vw, 24px);
+  line-height: calc(29 / 24);
+  text-align: justify;
+  color: #3D3827;
+}
+
+.service-card__cta {
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.12em 0.3em;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(18px, 1.75vw, 28px);
+  line-height: 0.78;
+  text-transform: uppercase;
+  color: #423E3D;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: border-color 0.25s ease;
+}
+
+.service-card__cta:hover,
+.service-card__cta:focus-visible {
+  border-color: #000000;
+  color: #423E3D;
+}
+
+.service-card__cta:focus-visible {
+  outline: none;
+}
+
+.cta-chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.cta-chevron__icon {
+  display: block;
+  width: 0.45em;
+  height: auto;
+}
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+#contact .card__content.contact {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: calc(var(--space-xl) + 48px);
+  padding-bottom: var(--section-padding-x);
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-lg);
+  width: 100%;
+  align-items: start;
+}
+
+.contact__info {
+  grid-column: 1 / span 5;
+}
+
+.contact__details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact__detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--color-text-primary);
+}
+
+.contact__detail a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.contact__detail a:hover {
+  color: var(--color-gold);
+}
+
+.contact__icon {
+  flex-shrink: 0;
+  color: var(--color-text-primary);
+}
+
+.contact__form-panel {
+  grid-column: 7 / -1;
+  padding: var(--space-lg);
+  background: var(--color-bg-contact-form);
+}
+
+.contact__form-title {
+  margin: 0 0 var(--space-lg);
+  font-family: var(--font-typewriter);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(24px, 2.5vw, 36px);
+  line-height: 1;
+  text-align: justify;
+  letter-spacing: -0.04em;
+  color: #E3DFD6;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form__field label {
+  font-family: var(--font-typewriter);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(18px, 1.67vw, 24px);
+  line-height: 1;
+  text-align: justify;
+  letter-spacing: -0.04em;
+  color: #E3DFD6;
+}
+
+.form__field input,
+.form__field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(243, 243, 226, 0.25);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 300;
+  padding: var(--space-sm) 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+  resize: none;
+}
+
+.form__field--message textarea {
+  min-height: 140px;
+  padding: var(--space-sm);
+  border: none;
+  border-bottom: none;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.form__field input:focus,
+.form__field textarea:focus {
+  border-bottom-color: var(--color-gold);
+}
+
+.form__field--message textarea:focus {
+  border-bottom: none;
+  outline: 1px solid var(--color-gold);
+  outline-offset: -1px;
+}
+
+.form__submit {
+  align-self: flex-start;
+  margin-top: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(18px, 1.67vw, 24px);
+  line-height: 0.78;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.form__submit:hover,
+.form__submit:focus-visible {
+  opacity: 0.75;
+}
+
+.form__submit:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+#footer.card--normal {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: var(--color-bg-dark);
+  overflow: hidden;
+}
+
+.footer__inner {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.footer__graphic {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ==========================================================================
+   Scroll reveals
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   Kinetic text
+   ========================================================================== */
+
+.kinetic-text {
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.kinetic-text__track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: drift-left 20s linear infinite;
+}
+
+.kinetic-text--right .kinetic-text__track {
+  animation-name: drift-right;
+}
+
+@keyframes drift-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes drift-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .card--stack-entry .card__content {
+    transform: none;
+  }
+
+  .service-cards-section__deck .service-card {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding-y: var(--space-xl);
+  }
+
+  .hero__brand {
+    width: min(72vw, 340px);
+  }
+
+  .nav__bar {
+    grid-template-columns: 1fr auto;
+    padding: var(--space-sm) var(--section-padding-x);
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .nav__hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    pointer-events: auto;
+  }
+
+  .nav__hamburger span {
+    width: 24px;
+    height: 1.5px;
+    background: var(--nav-link-color);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  .nav__mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-lg);
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 99;
+  }
+
+  .nav__mobile-menu.is-open {
+    transform: translateX(0);
+  }
+
+  .nav__mobile-menu a {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 10vw, 56px);
+    color: var(--color-text-primary);
+    letter-spacing: var(--tracking-display);
+  }
+
+  .kinetic-text__track {
+    animation-duration: 30s;
+  }
+
+  .who-we-are__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  #who-we-are .card__content.who-we-are {
+    gap: var(--space-xl);
+    padding-top: calc(var(--space-xl) + 48px);
+  }
+
+  .who-we-are__text {
+    font-size: clamp(18px, 4.8vw, 22px);
+    line-height: 1.45;
+    min-width: 0;
+  }
+
+  .philosophy__pin {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+  }
+
+  #philosophy .card__content.philosophy {
+    min-height: auto;
+    padding-top: calc(var(--space-xl) + 48px);
+    padding-bottom: var(--space-xl);
+  }
+
+  .philosophy__copy {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .philosophy__image {
+    object-position: 40% center;
+  }
+
+  .philosophy__headline {
+    font-size: clamp(36px, 10vw, 52px);
+    line-height: 0.85;
+  }
+
+  .philosophy__subhead {
+    font-size: clamp(16px, 4.5vw, 20px);
+    line-height: 1.3;
+  }
+
+  .philosophy__tagline {
+    font-size: clamp(15px, 4vw, 18px);
+    line-height: 1.45;
+  }
+
+  #what-we-do .card__content.what-we-do {
+    min-height: auto;
+    gap: var(--space-lg);
+    padding-top: calc(var(--space-xl) + 48px);
+    padding-bottom: var(--space-xl);
+  }
+
+  .what-we-do__list {
+    margin-left: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+  }
+
+  .what-we-do__item {
+    font-size: clamp(26px, 7vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  #service-cards {
+    height: auto !important;
+  }
+
+  .service-cards-section__pin {
+    position: relative !important;
+    height: auto;
+    min-height: auto;
+    padding: var(--space-lg) var(--section-padding-x);
+  }
+
+  .service-cards-section__pin.is-fixed,
+  .service-cards-section__pin.is-ended {
+    position: relative !important;
+    bottom: auto;
+  }
+
+  .service-cards-section__deck {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    position: relative;
+    height: auto;
+    padding-bottom: var(--space-xl);
+  }
+
+  .service-cards-section--static .service-card,
+  .service-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .service__heading-block,
+  .service-card__tagline,
+  .service-card__body {
+    max-width: none;
+  }
+
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .contact__info,
+  .contact__form-panel {
+    grid-column: 1 / -1;
+  }
+
+  .contact__heading {
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact__form-panel {
+    padding: var(--space-md);
+  }
+
+  .footer__graphic {
+    object-position: 42% center;
+  }
+}
