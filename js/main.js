@@ -149,6 +149,20 @@ function initMobileNav() {
   });
 }
 
+function fitServiceCardHeadings() {
+  document.querySelectorAll('.service__heading-block').forEach((block) => {
+    block.style.fontSize = '';
+
+    let size = parseFloat(window.getComputedStyle(block).fontSize);
+    const minSize = Math.max(size * 0.42, 24);
+
+    while (block.scrollWidth > block.clientWidth + 1 && size > minSize) {
+      size -= 0.5;
+      block.style.fontSize = `${size}px`;
+    }
+  });
+}
+
 function initServiceCardsSection() {
   const section = document.querySelector('#service-cards');
   const stage = section?.querySelector('.service-cards-section__stage');
@@ -333,6 +347,7 @@ function initServiceCardsSection() {
 
   layout();
   updateCards();
+  fitServiceCardHeadings();
   handleHash();
 
   window.addEventListener('scroll', updateCards, { passive: true });
@@ -340,12 +355,21 @@ function initServiceCardsSection() {
   window.addEventListener('resize', () => {
     layout();
     updateCards();
+    fitServiceCardHeadings();
   });
 
   mobileQuery.addEventListener('change', () => {
     layout();
     updateCards();
+    fitServiceCardHeadings();
   });
+
+  document.fonts.ready.then(fitServiceCardHeadings);
+
+  if (typeof ResizeObserver !== 'undefined') {
+    const resizeObserver = new ResizeObserver(() => fitServiceCardHeadings());
+    cards.forEach((card) => resizeObserver.observe(card));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
