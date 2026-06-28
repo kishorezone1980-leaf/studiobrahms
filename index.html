@@ -82,7 +82,7 @@
     <div class="nav__bar">
       <div class="nav__links">
         <a href="#who-we-are">WHO WE ARE</a>
-        <a href="#what-we-do">WHAT WE CREATE</a>
+        <a href="#what-we-do">WHAT WE DO</a>
         <a href="#contact">CONTACT</a>
       </div>
       <button class="nav__hamburger" type="button" aria-label="Menu" aria-expanded="false">
@@ -328,7 +328,7 @@
                 <input type="text" id="contact-name" name="name" autocomplete="name" required>
               </div>
               <div class="form__field">
-                <label for="contact-email">Email</label>
+                <label for="contact-email">Mail</label>
                 <input type="email" id="contact-email" name="email" autocomplete="email" required>
               </div>
               <div class="form__field form__field--message">
@@ -343,8 +343,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="card card--normal" id="footer" data-nav-theme="dark" aria-label="Footer">
-      <div class="footer__inner">
+    <footer class="footer" id="footer" data-nav-theme="dark" aria-label="Footer">
+      <picture class="footer__picture">
+        <source media="(max-width: 768px)" srcset="images/Footer-graphic-mobile.png">
         <img
           src="images/Footer-graphic.svg"
           alt=""
@@ -352,7 +353,7 @@
           width="1440"
           height="932"
         >
-      </div>
+      </picture>
     </footer>
 
   </div>

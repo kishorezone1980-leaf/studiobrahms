@@ -54,7 +54,8 @@ function initStackCardAnimations() {
   };
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+  if (prefersReducedMotion || mobileQuery.matches) {
     stackCards.forEach(showCard);
     return;
   }
